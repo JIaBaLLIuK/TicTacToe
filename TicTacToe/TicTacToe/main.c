@@ -7,7 +7,7 @@ char gameBoard[3][3];
 
 void ResetBoard();
 void PrintBoard();
-void PlayerMove();
+void PlayerMove(char);
 void ComputerMove();
 char CheckWinner();
 int CheckFreeSpace();
@@ -42,7 +42,7 @@ int main()
 			break;
 		}
 		printf("Ваш ход!\n");
-		PlayerMove();
+		PlayerMove('X');
 		PrintBoard();
 		winner = CheckWinner();
 		if (winner == 'O' || winner == 'X')
@@ -137,7 +137,7 @@ void ComputerMove()
 	gameBoard[x][y] = 'O';
 }
 
-void PlayerMove()
+void PlayerMove(char player)
 {
 	int x, y;
 	do
@@ -147,5 +147,5 @@ void PlayerMove()
 		printf("Введите номер столбца (1 - 3)\n");
 		y = InputAndCheck(1, 3);
 	} while (gameBoard[x - 1][y - 1] != ' ');
-	gameBoard[x - 1][y - 1] = 'X';
+	gameBoard[x - 1][y - 1] = player;
 }

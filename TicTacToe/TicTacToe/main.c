@@ -18,46 +18,53 @@ int main()
 {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
-	ResetBoard();
 	int freeCells;
 	char winner = ' ';
+	int stopPlayingWithBot = 0;
 	do
 	{
 		system("CLS");
-		printf("Ход компьютера...\n");
-		Sleep(250);
-		ComputerMove();
-		PrintBoard();
-		winner = CheckWinner();
-		if (winner == 'O' || winner == 'X')
+		ResetBoard();
+		do
 		{
-			PrintWinner(winner);
-			break;
-		}
-		freeCells = CheckFreeSpace();
-		if (freeCells == 0)
-		{
+			system("CLS");
+			printf("Ход компьютера...\n");
+			Sleep(250);
+			ComputerMove();
+			PrintBoard();
 			winner = CheckWinner();
-			PrintWinner(winner);
-			break;
-		}
-		printf("Ваш ход!\n");
-		PlayerMove('X');
-		PrintBoard();
-		winner = CheckWinner();
-		if (winner == 'O' || winner == 'X')
-		{
-			PrintWinner(winner);
-			break;
-		}
-		freeCells = CheckFreeSpace();
-		if (freeCells == 0)
-		{
+			if (winner == 'O' || winner == 'X')
+			{
+				PrintWinner(winner);
+				break;
+			}
+			freeCells = CheckFreeSpace();
+			if (freeCells == 0)
+			{
+				winner = CheckWinner();
+				PrintWinner(winner);
+				break;
+			}
+			printf("Ваш ход!\n");
+			PlayerMove('X');
+			PrintBoard();
 			winner = CheckWinner();
-			PrintWinner(winner);
-			break;
-		}
-	} while (freeCells > 0);
+			if (winner == 'O' || winner == 'X')
+			{
+				PrintWinner(winner);
+				break;
+			}
+			freeCells = CheckFreeSpace();
+			if (freeCells == 0)
+			{
+				winner = CheckWinner();
+				PrintWinner(winner);
+				break;
+			}
+		} while (freeCells > 0);
+		printf("Повторить игру?\n0 - да\n1 - нет\n");
+		stopPlayingWithBot = InputAndCheck(0, 1);
+	} while (!stopPlayingWithBot);
 	rewind(stdin);
 	char pause = getchar();
 	return 0;
@@ -142,9 +149,9 @@ void PlayerMove(char player)
 	int x, y;
 	do
 	{
-		printf("Введите номер строки (1 - 3)\n");
+		printf("Введите номер строки (1 - 3):\n");
 		x = InputAndCheck(1, 3);
-		printf("Введите номер столбца (1 - 3)\n");
+		printf("Введите номер столбца (1 - 3):\n");
 		y = InputAndCheck(1, 3);
 	} while (gameBoard[x - 1][y - 1] != ' ');
 	gameBoard[x - 1][y - 1] = player;

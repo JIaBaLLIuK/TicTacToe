@@ -130,6 +130,7 @@ int main()
 			break;
 		}
 	} while (!isFinishedGame);
+	system("pause");
 	return 0;
 }
 

@@ -69,7 +69,9 @@ int main()
 			do
 			{
 				system("CLS");
+				printf("Пустое игровое поле выглядит следующим образом:\n");
 				ResetBoard();
+				PrintBoard();
 				do
 				{
 					printf("Ход игрока \"O\"!\n");

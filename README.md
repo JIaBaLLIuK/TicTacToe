@@ -1,2 +1,2 @@
 # TicTacToe
-Simple tic-tac-toe console application.
+Simple tic-tac-toe console game.
